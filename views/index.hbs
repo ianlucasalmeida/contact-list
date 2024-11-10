@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact List</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" rel="stylesheet">
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .box {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <div class="box">
+        <h1 class="title">Lista de Contato</h1>
+
+        <form action="/add" method="POST">
+          <div class="field">
+            <label class="label">Nome</label>
+            <div class="control">
+              <input class="input" type="text" name="name" placeholder="Digite o nome do contato: " required>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Telefone</label>
+            <div class="control">
+              <input class="input" type="text" name="phone" placeholder="Digite o número de telefone: " required>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary" type="submit">Adicionar Contato</button>
+            </div>
+          </div>
+        </form>
+
+        <table class="table is-striped is-fullwidth">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Número de Telefone</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each contacts}}
+            <tr>
+              <td>{{this.name}}</td>
+              <td>{{this.phone}}</td>
+              <td>
+                <form action="/delete/{{this.id}}" method="POST" style="display:inline;">
+                  <button class="button is-danger" type="submit">Apagar</button>
+                </form>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
